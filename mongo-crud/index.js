@@ -8,8 +8,9 @@ app.use(express.json());
 
 
 app.use(cors({
-  origin: "https://student-details-mongodb.vercel.app/" // your frontend origin
+  origin: process.env.APPLICATION_FRONTEND_URL
 }));
+
 
 
 // Routes

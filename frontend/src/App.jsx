@@ -19,10 +19,11 @@ export default function App() {
   };
 
 useEffect(() => {
-  fetch("https://student-details-server-self.vercel.app/students")
-    .then(res => res.json())
-    .then(data => setStudents(data)) // data must be an array
-    .catch(err => console.error(err));
+fetch(`${import.meta.env.VITE_SERVER_URL}/students`)
+  .then(res => res.json())
+  .then(data => setStudents(data))
+  .catch(err => console.error(err));
+
 }, []);
 
 
