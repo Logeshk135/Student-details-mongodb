@@ -2,8 +2,15 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import studentRoutes from "./routes/students.js";
+import cors from "cors";
 const app = express();
 app.use(express.json());
+
+
+app.use(cors({
+  origin: "https://student-details-mongodb.vercel.app/" // your frontend origin
+}));
+
 
 // Routes
 app.use("/students", studentRoutes);

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useState, useEffect } from "react";
+
 
 export default function App() {
   const [students, setStudents] = useState([]);
@@ -9,7 +10,7 @@ export default function App() {
     course: "",
   });
 
-  const API = "http://localhost:5000/api/students";
+  const API = "https://student-details-server-self.vercel.app/api/students";
 
   // Load students
   const loadStudents = async () => {
@@ -17,9 +18,13 @@ export default function App() {
     setStudents(res.data);
   };
 
-  useEffect(() => {
-    loadStudents();
-  }, []);
+useEffect(() => {
+  fetch("https://student-details-server-self.vercel.app/students")
+    .then(res => res.json())
+    .then(data => setStudents(data)) // data must be an array
+    .catch(err => console.error(err));
+}, []);
+
 
   // handle input change
   const handleChange = (e) =>
@@ -117,17 +122,17 @@ export default function App() {
 
       {/* Students Display */}
       <div className="grid gap-4 max-w-3xl mx-auto">
-        {students.map((s) => (
-          <div
-            key={s._id}
-            className="bg-amber-200 p-4 rounded-xl flex justify-between items-center"
-          >
-            <div>
-              <h3 className="text-lg font-bold">{s.name}</h3>
-              <p>Age: {s.age}</p>
-              <p>Course: {s.course}</p>
-              <p>Status: {s.status}</p>
-            </div>
+  {students.map((s) => (
+    <div
+     key={s._id || index}
+      className="bg-amber-200 p-4 rounded-xl flex justify-between items-center"
+    >
+      <div>
+        <h3 className="text-lg font-bold">{s.name}</h3>
+        <p>Age: {s.age}</p>
+        <p>Course: {s.course}</p>
+        <p>Status: {s.status}</p>
+      </div>
 
             <div className="flex gap-2">
               <button

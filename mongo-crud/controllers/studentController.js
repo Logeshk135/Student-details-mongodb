@@ -82,3 +82,16 @@ export const deleteMany = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+
+export default {
+  createStudent,
+  insertMany,
+  getAll,
+  getById,
+  updateOne,
+  updateMany,
+  deleteOne,
+  deleteMany,
+};
+
