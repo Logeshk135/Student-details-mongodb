@@ -1,7 +1,7 @@
 // controllers/studentController.js
-import Student from "../models/Student.js";
+import Student from "../models/Student.js"; // ES module import
 
-// Create one
+// Create one student
 export const createStudent = async (req, res) => {
   try {
     const student = await Student.create(req.body);
@@ -11,7 +11,7 @@ export const createStudent = async (req, res) => {
   }
 };
 
-// Insert many
+// Insert many students
 export const insertMany = async (req, res) => {
   try {
     const docs = await Student.insertMany(req.body);
@@ -21,7 +21,7 @@ export const insertMany = async (req, res) => {
   }
 };
 
-// Get all
+// Get all students
 export const getAll = async (req, res) => {
   try {
     const students = await Student.find(req.query);
@@ -31,18 +31,18 @@ export const getAll = async (req, res) => {
   }
 };
 
-// Get by id
+// Get student by ID
 export const getById = async (req, res) => {
   try {
     const s = await Student.findById(req.params.id);
-    if (!s) return res.status(404).json({ msg: 'Not found' });
+    if (!s) return res.status(404).json({ msg: "Not found" });
     res.json(s);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
 
-// Update one
+// Update one student
 export const updateOne = async (req, res) => {
   try {
     const updated = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -52,7 +52,7 @@ export const updateOne = async (req, res) => {
   }
 };
 
-// Update many
+// Update many students
 export const updateMany = async (req, res) => {
   try {
     const { filter, update } = req.body;
@@ -63,7 +63,7 @@ export const updateMany = async (req, res) => {
   }
 };
 
-// Delete one
+// Delete one student
 export const deleteOne = async (req, res) => {
   try {
     const del = await Student.findByIdAndDelete(req.params.id);
@@ -73,7 +73,7 @@ export const deleteOne = async (req, res) => {
   }
 };
 
-// Delete many
+// Delete many students
 export const deleteMany = async (req, res) => {
   try {
     const result = await Student.deleteMany(req.body.filter || {});

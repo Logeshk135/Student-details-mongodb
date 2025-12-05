@@ -6,8 +6,9 @@ const StudentSchema = new mongoose.Schema({
   course: String,
   status: {
     type: String,
-    default: "pending"
-  }
+    default: "pending",
+  },
 });
 
-export default mongoose.model("Student", StudentSchema);
+const Student = mongoose.model("Student", StudentSchema);
+export default Student;

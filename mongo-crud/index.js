@@ -1,19 +1,22 @@
 import express from "express";
-import studentRoutes from "./routes/students.js";
-import connectDB from "./db.js";
 import dotenv from "dotenv";
-dotenv.config();
-
+import mongoose from "mongoose";
+import studentRoutes from "./routes/students.js";
 const app = express();
 app.use(express.json());
 
-connectDB();
+// Routes
+app.use("/students", studentRoutes);
 
-app.get("/", (req,res)=>{
-  res.send("API running ✔️");
+const PORT = process.env.PORT || 5000;
+
+// Connect to MongoDB
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URI) // no options needed in Mongoose 7+
+  .then(() => console.log("MongoDB connected"))
+  .catch(err => console.error("MongoDB connection error:", err));
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
-app.use("/api/students", studentRoutes);
-
-const PORT = process.env.PORT || 4000;
-app.listen(PORT, ()=> console.log(`Server running at ${PORT}`));
