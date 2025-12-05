@@ -1,8 +1,8 @@
 // controllers/studentController.js
-const Student = require('../models/Student');
+import Student from "../models/Student.js";
 
 // Create one
-exports.createStudent = async (req, res) => {
+export const createStudent = async (req, res) => {
   try {
     const student = await Student.create(req.body);
     res.status(201).json(student);
@@ -12,19 +12,19 @@ exports.createStudent = async (req, res) => {
 };
 
 // Insert many
-exports.insertMany = async (req, res) => {
+export const insertMany = async (req, res) => {
   try {
-    const docs = await Student.insertMany(req.body); // expects array
+    const docs = await Student.insertMany(req.body);
     res.status(201).json(docs);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
-// Get all (with optional query filters)
-exports.getAll = async (req, res) => {
+// Get all
+export const getAll = async (req, res) => {
   try {
-    const students = await Student.find(req.query); // simple: pass query params directly
+    const students = await Student.find(req.query);
     res.json(students);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -32,7 +32,7 @@ exports.getAll = async (req, res) => {
 };
 
 // Get by id
-exports.getById = async (req, res) => {
+export const getById = async (req, res) => {
   try {
     const s = await Student.findById(req.params.id);
     if (!s) return res.status(404).json({ msg: 'Not found' });
@@ -43,7 +43,7 @@ exports.getById = async (req, res) => {
 };
 
 // Update one
-exports.updateOne = async (req, res) => {
+export const updateOne = async (req, res) => {
   try {
     const updated = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true });
     res.json(updated);
@@ -52,10 +52,9 @@ exports.updateOne = async (req, res) => {
   }
 };
 
-// Update many (by filter)
-exports.updateMany = async (req, res) => {
+// Update many
+export const updateMany = async (req, res) => {
   try {
-    // req.body should have { filter: {...}, update: {...} }
     const { filter, update } = req.body;
     const result = await Student.updateMany(filter, update);
     res.json(result);
@@ -65,7 +64,7 @@ exports.updateMany = async (req, res) => {
 };
 
 // Delete one
-exports.deleteOne = async (req, res) => {
+export const deleteOne = async (req, res) => {
   try {
     const del = await Student.findByIdAndDelete(req.params.id);
     res.json({ deleted: del });
@@ -74,10 +73,10 @@ exports.deleteOne = async (req, res) => {
   }
 };
 
-// Delete many (careful)
-exports.deleteMany = async (req, res) => {
+// Delete many
+export const deleteMany = async (req, res) => {
   try {
-    const result = await Student.deleteMany(req.body.filter || {}); // pass filter in body
+    const result = await Student.deleteMany(req.body.filter || {});
     res.json(result);
   } catch (err) {
     res.status(500).json({ error: err.message });

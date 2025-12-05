@@ -1,8 +1,9 @@
 // routes/students.js
-const express = require('express');
-const router = express.Router();
-const ctrl = require('../controllers/studentController');
+import express from "express";
+import * as ctrl from "../controllers/studentController.js";
 
+
+const router = express.Router();
 // CRUD
 router.post('/', ctrl.createStudent);           // create one
 router.post('/many', ctrl.insertMany);          // insert many
@@ -22,5 +23,4 @@ router.post("/", async (req, res) => {
   }
 });
 
-
-module.exports = router;
+export default router; 
