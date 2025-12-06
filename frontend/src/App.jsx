@@ -10,7 +10,7 @@ export default function App() {
     course: "",
   });
 
-  const API = "http://localhost:5000/studentdetails";
+  const API = "http://localhost:5000/Student";
 
   // Load students
   const loadStudents = async () => {
