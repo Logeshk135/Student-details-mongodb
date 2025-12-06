@@ -8,13 +8,13 @@ app.use(express.json());
 
 
 app.use(cors({
-  origin: process.env.APPLICATION_FRONTEND_URL
+  origin: process.env.APPLICATION_FRONTEND_URL || "*"
 }));
 
 
 
 // Routes
-app.use("/students", studentRoutes);
+app.use("/studentdetails", studentRoutes);
 
 const PORT = process.env.PORT || 5000;
 

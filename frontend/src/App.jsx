@@ -10,16 +10,17 @@ export default function App() {
     course: "",
   });
 
-  const API = "https://student-details-server-self.vercel.app/api/students";
+  const API = "http://localhost:5000/studentdetails";
 
   // Load students
   const loadStudents = async () => {
     const res = await axios.get(API);
     setStudents(res.data);
   };
+console.log(import.meta.env.VITE_BACKEND_SERVER_URL);
 
 useEffect(() => {
-fetch(`${import.meta.env.VITE_SERVER_URL}/students`)
+fetch(`${import.meta.env.VITE_BACKEND_SERVER_URL}/studentdetails`)
   .then(res => res.json())
   .then(data => setStudents(data))
   .catch(err => console.error(err));
