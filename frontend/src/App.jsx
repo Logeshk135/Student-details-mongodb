@@ -10,7 +10,8 @@ export default function App() {
     course: "",
   });
 
-  const API = "http://localhost:5000/Student";
+  const API = `${import.meta.env.VITE_BACKEND_SERVER_URL}/students`;
+
 
   // Load students
   const loadStudents = async () => {
