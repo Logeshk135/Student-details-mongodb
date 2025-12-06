@@ -14,7 +14,7 @@ app.use(cors({
 
 
 // Routes
-app.use("/students", studentRoutes);
+app.use("/api/studentdetails", studentRoutes);
 
 const PORT = process.env.PORT || 5000;
 
