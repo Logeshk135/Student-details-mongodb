@@ -10,7 +10,7 @@ export default function App() {
     course: "",
   });
 
-  const API = "http://localhost:5000/studentdetails";
+   const API = `${import.meta.env.VITE_BACKEND_SERVER_URL}/api/studentdetails`;
 
   // Load students
   const loadStudents = async () => {
@@ -20,11 +20,7 @@ export default function App() {
 console.log(import.meta.env.VITE_BACKEND_SERVER_URL);
 
 useEffect(() => {
-fetch(`${import.meta.env.VITE_BACKEND_SERVER_URL}/studentdetails`)
-  .then(res => res.json())
-  .then(data => setStudents(data))
-  .catch(err => console.error(err));
-
+    loadStudents();
 }, []);
 
 
