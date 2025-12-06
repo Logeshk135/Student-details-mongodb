@@ -10,7 +10,7 @@ export default function App() {
     course: "",
   });
 
-  const API = `${import.meta.env.VITE_BACKEND_SERVER_URL}/students`;
+  const API = `${import.meta.env.VITE_BACKEND_SERVER_URL}/api/studentdetails`;
 
 
   // Load students
