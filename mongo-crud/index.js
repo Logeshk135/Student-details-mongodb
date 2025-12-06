@@ -1,30 +1,21 @@
 import express from "express";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import studentRoutes from "./routes/students.js";
 import cors from "cors";
+import studentRoutes from "./routes/students.js";
+import { connectDB } from "./db.js"; // import connection function
+
 const app = express();
+
 app.use(express.json());
 
-
 app.use(cors({
-  origin: process.env.APPLICATION_FRONTEND_URL || "*"
+  origin: process.env.APPLICATION_FRONTEND_URL.trim() // must match exactly
 }));
 
+app.use("/api/students", studentRoutes);
 
-
-// Routes
-app.use("/api/studentdetails", studentRoutes);
-
-const PORT = process.env.PORT || 5000;
-
-// Connect to MongoDB
-dotenv.config();
-
-mongoose.connect(process.env.MONGO_URI) // no options needed in Mongoose 7+
-  .then(() => console.log("MongoDB connected"))
-  .catch(err => console.error("MongoDB connection error:", err));
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+// connect DB then start server
+connectDB().then(() => {
+  app.listen(process.env.PORT || 5000, () => {
+    console.log(`Server running on port ${process.env.PORT || 5000}`);
+  });
 });
